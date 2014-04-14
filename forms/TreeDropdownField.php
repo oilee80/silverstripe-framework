@@ -462,7 +462,8 @@ class TreeDropdownField extends FormField {
 				$this->searchIds[$row->ID] = true;
 			}
 			while (!empty($parents)) {
-				$res = DB::query('SELECT "ParentID", "ID" FROM "' . $this->sourceObject
+				$baseTable = $table = singleton( $this->sourceObject )->baseTable();
+				$res = DB::query('SELECT "ParentID", "ID" FROM "' . $baseTable
 					. '" WHERE "ID" in ('.implode(',',array_keys($parents)).')');
 				$parents = array();
 
